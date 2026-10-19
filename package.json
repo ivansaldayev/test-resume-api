@@ -15,7 +15,9 @@
   },
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "biome check && git ls-files -z -co --exclude-standard -- '*.md' '*.yml' '*.yaml' | xargs -0 -r prettier --no-error-on-unmatched-pattern --check",
+    "format": "biome check --write && git ls-files -z -co --exclude-standard -- '*.md' '*.yml' '*.yaml' | xargs -0 -r prettier --no-error-on-unmatched-pattern --write",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -29,11 +31,12 @@
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.15",
     "@nestjs/cli": "^12.0.0",
     "@nestjs/schematics": "^12.0.0",
     "@types/express": "^5.0.0",
     "@types/node": "^24.0.0",
-    "prettier": "^3.4.2",
+    "prettier": "3.9.10",
     "typescript": "^6.0.2"
   }
 }
