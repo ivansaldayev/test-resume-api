@@ -1,0 +1,417 @@
+{
+  "profile": {
+    "slug": "ivan-saldayev",
+    "name": "Салдаев Иван Николаевич",
+    "title": "Fullstack-разработчик — Node.js, TypeScript, React",
+    "description": "Fullstack-разработчик: делаю веб- и мобильные приложения, бэкенд и интеграции с корпоративными системами на Node.js, TypeScript, React и React Native, а также на .NET. При выборе технологического стека отталкиваюсь от требований проекта и команды. К AI отношусь прагматично: инструменты снимают рутину и ускоряют работу, а техническое видение от БД до UI задаю вместе с требованиями и контролирую каждый этап. Ценю работу в команде профессионалов, обмен опытом и возможность учиться у коллег.",
+    "location": "Астана",
+    "links": [
+      {
+        "type": "email",
+        "url": "mailto:ivan01march@gmail.com"
+      },
+      {
+        "type": "github",
+        "url": "https://github.com/ivansaldayev"
+      }
+    ]
+  },
+  "skills": [
+    {
+      "name": "TypeScript",
+      "category": "language"
+    },
+    {
+      "name": "JavaScript",
+      "category": "language"
+    },
+    {
+      "name": "C#",
+      "category": "language"
+    },
+    {
+      "name": "Delphi",
+      "category": "language"
+    },
+    {
+      "name": "Node.js",
+      "category": "backend"
+    },
+    {
+      "name": ".NET",
+      "category": "backend"
+    },
+    {
+      "name": "ASP.NET Core",
+      "category": "backend"
+    },
+    {
+      "name": "Kurento Media Server",
+      "category": "backend"
+    },
+    {
+      "name": "Telegraf",
+      "category": "backend"
+    },
+    {
+      "name": "React",
+      "category": "frontend"
+    },
+    {
+      "name": "CoreUI",
+      "category": "frontend"
+    },
+    {
+      "name": "Angular",
+      "category": "frontend"
+    },
+    {
+      "name": "Vue.js",
+      "category": "frontend"
+    },
+    {
+      "name": "React Native",
+      "category": "mobile"
+    },
+    {
+      "name": "Expo",
+      "category": "mobile"
+    },
+    {
+      "name": "React Native Reanimated",
+      "category": "mobile"
+    },
+    {
+      "name": "React Native Gesture Handler",
+      "category": "mobile"
+    },
+    {
+      "name": "MongoDB",
+      "category": "database"
+    },
+    {
+      "name": "Microsoft SQL Server",
+      "category": "database"
+    },
+    {
+      "name": "InterBase",
+      "category": "database"
+    },
+    {
+      "name": "Docker",
+      "category": "devops"
+    },
+    {
+      "name": "GitLab CI/CD",
+      "category": "devops"
+    },
+    {
+      "name": "Linux",
+      "category": "devops"
+    },
+    {
+      "name": "Windows Server",
+      "category": "devops"
+    },
+    {
+      "name": "GitHub Actions",
+      "category": "devops"
+    },
+    {
+      "name": "Claude Code",
+      "category": "tools"
+    },
+    {
+      "name": "Cursor",
+      "category": "tools"
+    },
+    {
+      "name": "Playwright",
+      "category": "tools"
+    },
+    {
+      "name": "Cypress",
+      "category": "tools"
+    },
+    {
+      "name": "Appium",
+      "category": "tools"
+    },
+    {
+      "name": "Figma",
+      "category": "tools"
+    },
+    {
+      "name": "Swagger",
+      "category": "tools"
+    },
+    {
+      "name": "Jest",
+      "category": "tools"
+    },
+    {
+      "name": "MCP",
+      "category": "other"
+    },
+    {
+      "name": "WebRTC",
+      "category": "other"
+    },
+    {
+      "name": "TURN/STUN",
+      "category": "other"
+    },
+    {
+      "name": "Active Directory",
+      "category": "other"
+    },
+    {
+      "name": "Kerio Firewall",
+      "category": "other"
+    },
+    {
+      "name": "Raspberry Pi",
+      "category": "other"
+    },
+    {
+      "name": "Cubieboard",
+      "category": "other"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Контрактная разработка (ИП)",
+      "position": "Fullstack-разработчик",
+      "startDate": "2025-10",
+      "endDate": null,
+      "location": "Астана (удалённо)",
+      "achievements": [
+        "Сделал детерминированный экспорт дизайна из Figma (500+ фреймов) в проектную документацию: флоу экранов и схему данных.",
+        "Ускоряю разработку собственным AI-инструментарием: MCP-серверы и форки публичных MCP, мультиагентное ревью кода (архитектура, безопасность, производительность) и автотесты на Appium до ручной приёмки."
+      ],
+      "skills": [
+        "React Native",
+        "Expo",
+        "Node.js",
+        "TypeScript",
+        "MongoDB",
+        "React",
+        "CoreUI",
+        "Figma",
+        "MCP",
+        "Appium"
+      ]
+    },
+    {
+      "company": "Alloy Software",
+      "position": "Fullstack-разработчик",
+      "startDate": "2022-05",
+      "endDate": "2025-09",
+      "location": "Удалённо",
+      "achievements": [
+        "Мигрировал модуль Web Admin Center с ASP.NET Core 2.x на .NET 8 с преодолением ломающих изменений.",
+        "Написал компонент «бесконечной» виртуальной таблицы с переменной высотой строк, вложенными строками и перетаскиванием строк.",
+        "Перевёл около 50 E2E-сценариев модуля с Cypress на Playwright LLM-пайплайном собственной разработки практически без ручного переписывания.",
+        "Построил пайплайн автоматического покрытия нового функционала тестами по двухпроходной схеме: выделение сценариев → генерация тестов.",
+        "К завершению контракта покрытие тестами удвоилось, а AI-инициатива отмечена в рекомендательном письме руководителя."
+      ],
+      "skills": [
+        "React",
+        "ASP.NET Core",
+        ".NET",
+        "Microsoft SQL Server",
+        "Active Directory",
+        "Playwright",
+        "Cypress"
+      ]
+    },
+    {
+      "company": "Контрактная разработка (ИП)",
+      "position": "Fullstack-разработчик",
+      "startDate": "2020-03",
+      "endDate": "2022-05",
+      "location": "Астана",
+      "achievements": [
+        "Сделал систему предоставления платных данных для национальной гидрометеорологической службы РК с онлайн-оплатой и подписанием договоров ЭЦП НУЦ РК, которая работает в промышленной эксплуатации с 2021 года.",
+        "Сделал систему конференций и трансляций на десятки участников с записью всех медиапотоков, спроектировал для неё каскадную архитектуру масштабирования доставки, и систему принял заказчик (группа компаний).",
+        "Сделал корпоративный Telegram-бот с интеграцией с CRM для сервисной ИТ-компании, который работает более 4 лет без доработок."
+      ],
+      "skills": [
+        "MongoDB",
+        "Node.js",
+        "TypeScript",
+        "React",
+        "CoreUI",
+        "WebRTC",
+        "Kurento Media Server",
+        "TURN/STUN",
+        "Telegraf"
+      ]
+    },
+    {
+      "company": "Second Company",
+      "position": "Fullstack-разработчик",
+      "startDate": "2019-05",
+      "endDate": "2020-02",
+      "location": "Нидерланды (удалённо)",
+      "achievements": [],
+      "skills": ["React", "React Native", "Node.js", "MongoDB"]
+    },
+    {
+      "company": "Plumsail",
+      "position": "Разработчик (Vue.js, .NET)",
+      "startDate": "2018-10",
+      "endDate": "2019-03",
+      "location": "Удалённо",
+      "achievements": [],
+      "skills": ["Vue.js", ".NET"]
+    },
+    {
+      "company": "Retail Solutions",
+      "position": "Ведущий разработчик (архитектура)",
+      "startDate": "2017-11",
+      "endDate": "2018-10",
+      "location": "Казахстан",
+      "achievements": [
+        "Спроектировал архитектуру новой workflow-системы на стороннем workflow-движке (.NET Core) и Angular 5 с генерацией клиентских сервисов по Swagger."
+      ],
+      "skills": [".NET", "Angular", "Swagger"]
+    },
+    {
+      "company": "ТОО «CitySoft»",
+      "position": "Инженер-программист",
+      "startDate": "2016-03",
+      "endDate": "2017-11",
+      "location": "Астана",
+      "achievements": [
+        "Участвовал в командной разработке новых систем: мобильного приложения vsaune.kz и e-academy.",
+        "Разработал для e-academy встроенную систему вебинаров на основе открытых библиотек.",
+        "Настроил процесс CI/CD."
+      ],
+      "skills": []
+    },
+    {
+      "company": "ТОО «Devir»",
+      "position": "Разработчик .NET",
+      "startDate": "2014-03",
+      "endDate": "2016-03",
+      "location": "Астана",
+      "achievements": [
+        "Участвовал в разработке новых систем: биллинга, GPS-мониторинга и системы сбора и учёта данных с изменяющейся структурой."
+      ],
+      "skills": [".NET", "Raspberry Pi", "Cubieboard"]
+    },
+    {
+      "company": "ГКП «Центр информационных технологий г. Астаны»",
+      "position": "Заведующий сектором",
+      "startDate": "2011-03",
+      "endDate": "2012-10",
+      "location": "Астана",
+      "achievements": [],
+      "skills": []
+    },
+    {
+      "company": "ТОО «Nivo»",
+      "position": "Программист",
+      "startDate": "2006-11",
+      "endDate": "2007-05",
+      "location": "Астана",
+      "achievements": [],
+      "skills": ["Delphi", "InterBase"]
+    },
+    {
+      "company": "ГУ «Жолымбетский детский дом №1»",
+      "position": "Системный администратор",
+      "startDate": "2006-07",
+      "endDate": "2009-09",
+      "location": "пос. Жолымбет, Шортандинский район, Акмолинская область",
+      "achievements": [],
+      "skills": ["Windows Server", "Kerio Firewall"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "react-native-image-crop-data",
+      "description": "Open-source библиотека (MIT) для недеструктивного кропа изображений в React Native: кроп хранится как данные (CropData) и воспроизводится при любом размере превью, а пиксели обрезаются только при явном экспорте. Проверена на физических Android- и iOS-устройствах (New Architecture, Reanimated 4.1.1) и используется как npm-зависимость в текущем коммерческом проекте.",
+      "url": "https://www.npmjs.com/package/react-native-image-crop-data",
+      "repositoryUrl": "https://github.com/ivansaldayev/react-native-image-crop-data",
+      "skills": [
+        "TypeScript",
+        "React Native",
+        "React",
+        "React Native Reanimated",
+        "React Native Gesture Handler",
+        "Jest",
+        "GitHub Actions"
+      ]
+    },
+    {
+      "name": "Мобильное приложение для корпоративного заказчика (NDA)",
+      "description": "Мобильное приложение по дизайну из Figma и админ-панель со сбором данных из корпоративных систем заказчика (СУБД, HTTP API) и контролем доступа к данным. Единственный исполнитель — от требований до релиза.",
+      "url": null,
+      "repositoryUrl": null,
+      "skills": [
+        "React Native",
+        "Expo",
+        "Node.js",
+        "TypeScript",
+        "MongoDB",
+        "React",
+        "CoreUI",
+        "Figma"
+      ]
+    },
+    {
+      "name": "Alloy Navigator — Web Admin Center",
+      "description": "Модуль ITSM/ITAM-платформы Alloy Navigator для корпоративных клиентов США и ЕС, веб-замена легаси-десктопного приложения Settings. Начинал с фронтенд-части, затем вёл модуль как fullstack-разработчик.",
+      "url": "https://www.alloysoftware.com",
+      "repositoryUrl": null,
+      "skills": [
+        "React",
+        "ASP.NET Core",
+        ".NET",
+        "Microsoft SQL Server",
+        "Active Directory",
+        "Playwright",
+        "Cypress"
+      ]
+    },
+    {
+      "name": "Система предоставления платных данных для гидрометеорологической службы РК",
+      "description": "Сбор данных из корпоративных систем, админ-панель с контролем доступа, workflow договоров с генерацией документов (docx → PDF), онлайн-оплата через банковский эквайринг и подписание договоров ЭЦП НУЦ РК (pki.gov.kz). В промышленной эксплуатации с 2021 года.",
+      "url": null,
+      "repositoryUrl": null,
+      "skills": ["MongoDB", "Node.js", "TypeScript", "React", "CoreUI"]
+    },
+    {
+      "name": "Система конференций и трансляций",
+      "description": "Конференции на десятки участников с записью всех медиапотоков, чат с файлами и подключение как встраиваемая веб-библиотека; спроектирована каскадная архитектура масштабирования доставки. Принята заказчиком (группа компаний).",
+      "url": null,
+      "repositoryUrl": null,
+      "skills": [
+        "MongoDB",
+        "Node.js",
+        "TypeScript",
+        "React",
+        "CoreUI",
+        "WebRTC",
+        "Kurento Media Server",
+        "TURN/STUN"
+      ]
+    },
+    {
+      "name": "Корпоративный Telegram-бот",
+      "description": "Бот для сервисной ИТ-компании: заявки на вызов специалистов, уведомления, оценка выполнения и интеграция с CRM заказчика. В эксплуатации более 4 лет без доработок.",
+      "url": null,
+      "repositoryUrl": null,
+      "skills": ["MongoDB", "Node.js", "TypeScript", "Telegraf"]
+    },
+    {
+      "name": "e-academy",
+      "description": "Командная разработка в ТОО «CitySoft»; встроенную систему вебинаров на основе открытых библиотек разработал лично.",
+      "url": null,
+      "repositoryUrl": null,
+      "skills": []
+    }
+  ]
+}
