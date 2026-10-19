@@ -6,3 +6,130 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum SkillCategory {
+  LANGUAGE
+  BACKEND
+  FRONTEND
+  MOBILE
+  DATABASE
+  DEVOPS
+  TOOLS
+  OTHER
+
+  @@map("skill_category")
+}
+
+enum LinkType {
+  EMAIL
+  GITHUB
+  LINKEDIN
+  TELEGRAM
+
+  @@map("link_type")
+}
+
+model Profile {
+  id          Int     @id @default(autoincrement())
+  slug        String  @unique
+  name        String
+  title       String
+  description String
+  location    String?
+
+  links       ProfileLink[]
+  skills      Skill[]
+  experiences Experience[]
+  projects    Project[]
+
+  @@map("profiles")
+}
+
+model ProfileLink {
+  id        Int      @id @default(autoincrement())
+  profileId Int      @map("profile_id")
+  type      LinkType
+  url       String
+  sortOrder Int      @map("sort_order")
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+  @@map("profile_links")
+}
+
+model Skill {
+  id        Int           @id @default(autoincrement())
+  profileId Int           @map("profile_id")
+  name      String
+  category  SkillCategory
+  sortOrder Int           @map("sort_order")
+
+  profile     Profile           @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  experiences ExperienceSkill[]
+  projects    ProjectSkill[]
+
+  @@unique([profileId, name])
+  @@map("skills")
+}
+
+// The init migration also adds a CHECK constraint:
+// end_date IS NULL OR end_date >= start_date.
+model Experience {
+  id           Int       @id @default(autoincrement())
+  profileId    Int       @map("profile_id")
+  company      String
+  position     String
+  location     String?
+  startDate    DateTime  @map("start_date") @db.Date
+  endDate      DateTime? @map("end_date") @db.Date
+  achievements String[]  @default([])
+
+  profile Profile           @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  skills  ExperienceSkill[]
+
+  @@index([profileId, startDate])
+  @@map("experiences")
+}
+
+model ExperienceSkill {
+  experienceId Int @map("experience_id")
+  skillId      Int @map("skill_id")
+  sortOrder    Int @map("sort_order")
+
+  experience Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  skill      Skill      @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([experienceId, skillId])
+  @@index([skillId])
+  @@map("experience_skills")
+}
+
+model Project {
+  id            Int     @id @default(autoincrement())
+  profileId     Int     @map("profile_id")
+  name          String
+  description   String?
+  url           String?
+  repositoryUrl String? @map("repository_url")
+  sortOrder     Int     @map("sort_order")
+
+  profile Profile        @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  skills  ProjectSkill[]
+
+  @@unique([profileId, name])
+  @@map("projects")
+}
+
+model ProjectSkill {
+  projectId Int @map("project_id")
+  skillId   Int @map("skill_id")
+  sortOrder Int @map("sort_order")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  skill   Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, skillId])
+  @@index([skillId])
+  @@map("project_skills")
+}
