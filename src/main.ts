@@ -4,14 +4,23 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import type { Env } from './config/env.schema.js';
 
+const logger = new Logger('Bootstrap');
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const config = app.get<ConfigService<Env, true>>(ConfigService);
+  app.enableShutdownHooks();
 
+  const config = app.get<ConfigService<Env, true>>(ConfigService);
   const port = config.get('PORT', { infer: true });
 
   await app.listen(port);
 
-  new Logger('Bootstrap').log(`Application is listening on port ${port}`);
+  logger.log(`Application is listening on port ${port}`);
 }
-await bootstrap();
+
+try {
+  await bootstrap();
+} catch (error) {
+  logger.error(error instanceof Error ? error.message : error);
+  process.exit(1);
+}
