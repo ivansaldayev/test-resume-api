@@ -16,7 +16,7 @@
   "scripts": {
     "build": "nest build",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "biome check && git ls-files -z -co --exclude-standard -- '*.md' '*.yml' '*.yaml' | xargs -0 -r prettier --no-error-on-unmatched-pattern --check",
+    "lint": "biome check --error-on-warnings && git ls-files -z -co --exclude-standard -- '*.md' '*.yml' '*.yaml' | xargs -0 -r prettier --no-error-on-unmatched-pattern --check",
     "format": "biome check --write && git ls-files -z -co --exclude-standard -- '*.md' '*.yml' '*.yaml' | xargs -0 -r prettier --no-error-on-unmatched-pattern --write",
     "start": "nest start",
     "start:dev": "nest start --watch",
