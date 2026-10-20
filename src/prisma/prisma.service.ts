@@ -20,6 +20,7 @@ export class PrismaService
         // pg waits forever by default.
         connectionTimeoutMillis: 5_000,
       }),
+      log: [{ emit: 'event', level: 'query' }],
     });
   }
 
