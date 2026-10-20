@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppConfigModule } from './config/app-config.module.js';
+import { AppGraphQLModule } from './graphql/app-graphql.module.js';
 import { PrismaModule } from './prisma/prisma.module.js';
+import { ProfileModule } from './profile/profile.module.js';
 
 @Module({
-  imports: [AppConfigModule, PrismaModule],
+  imports: [AppConfigModule, PrismaModule, AppGraphQLModule, ProfileModule],
 })
 export class AppModule {}
