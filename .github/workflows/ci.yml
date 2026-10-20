@@ -32,6 +32,10 @@ jobs:
       - run: npm run test:e2e
       - run: git diff --exit-code schema.gql
       - run: docker compose config --quiet
+      - run: docker compose --file deploy/compose.yaml config --quiet
+        env:
+          IMAGE_TAG: ci
+          POSTGRES_PASSWORD: ci
 
   docker:
     runs-on: ubuntu-24.04-arm
