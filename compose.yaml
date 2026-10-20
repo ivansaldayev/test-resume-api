@@ -13,10 +13,22 @@ services:
     volumes:
       - db-data:/var/lib/postgresql
     healthcheck:
-      test: pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      test: pg_isready -h 127.0.0.1 -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
       interval: 5s
       timeout: 5s
       retries: 10
+
+  app:
+    build: .
+    restart: unless-stopped
+    init: true
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-resume}:${POSTGRES_PASSWORD:-resume}@db:5432/${POSTGRES_DB:-resume}
+    ports:
+      - 127.0.0.1:${APP_PORT:-3000}:3000
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   db-data:
