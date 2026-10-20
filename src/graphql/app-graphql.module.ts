@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import type { Env } from '../config/env.schema.js';
+import { exampleQuery } from './example-query.js';
 import type { GraphQLContext } from './loaders.decorator.js';
 import { LoadersFactory } from './loaders.factory.js';
 import { LoadersModule } from './loaders.module.js';
@@ -27,6 +28,7 @@ export const AppGraphQLModule = GraphQLModule.forRootAsync<ApolloDriverConfig>({
     plugins: [
       ApolloServerPluginLandingPageLocalDefault({
         embed: { runTelemetry: false, endpointIsEditable: false },
+        document: exampleQuery,
       }),
     ],
     context: (): GraphQLContext => ({ loaders: loadersFactory.create() }),
