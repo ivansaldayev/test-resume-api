@@ -1,7 +1,10 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GraphQLError } from 'graphql';
+import { Loaders } from '../graphql/loaders.decorator.js';
+import type { DataLoaders } from '../graphql/loaders.factory.js';
 import { Profile } from './profile.model.js';
 import { ProfileService } from './profile.service.js';
+import { ProfileLink } from './profile-link.model.js';
 
 @Resolver(() => Profile)
 export class ProfileResolver {
@@ -16,5 +19,13 @@ export class ProfileResolver {
       });
     }
     return profile;
+  }
+
+  @ResolveField(() => [ProfileLink])
+  links(
+    @Parent() profile: Profile,
+    @Loaders() loaders: DataLoaders,
+  ): Promise<ProfileLink[]> {
+    return loaders.linksByProfileId.load(profile.id);
   }
 }
