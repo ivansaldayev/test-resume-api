@@ -32,3 +32,22 @@ jobs:
       - run: npm run test:e2e
       - run: git diff --exit-code schema.gql
       - run: docker compose config --quiet
+
+  docker:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - run: docker compose up --detach --build --wait --wait-timeout 120
+
+      - name: Query profile
+        run: |
+          curl --fail --silent --show-error --max-time 10 \
+            --header 'Content-Type: application/json' \
+            --data '{"query":"{ profile { name } }"}' \
+            http://127.0.0.1:3000/graphql | tee response.json
+          jq --exit-status '.data.profile.name' response.json
+
+      - if: failure()
+        run: docker compose logs

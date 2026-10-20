@@ -1,0 +1,9 @@
+node_modules
+dist
+src/generated
+*.tsbuildinfo
+.env
+.env.*
+.git
+.github
+.vscode
