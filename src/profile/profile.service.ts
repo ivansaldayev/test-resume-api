@@ -8,4 +8,8 @@ export class ProfileService {
   getProfile() {
     return this.profileRepository.findFirst();
   }
+
+  getLinksByProfileIds(profileIds: number[]) {
+    return this.profileRepository.findLinksByProfileIds(profileIds);
+  }
 }

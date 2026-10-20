@@ -2,12 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+enum LinkType {
+  EMAIL
+  GITHUB
+  LINKEDIN
+  TELEGRAM
+}
+
 type Profile {
   description: String!
   id: ID!
+  links: [ProfileLink!]!
   location: String
   name: String!
   title: String!
+}
+
+type ProfileLink {
+  type: LinkType!
+  url: String!
 }
 
 type Query {
