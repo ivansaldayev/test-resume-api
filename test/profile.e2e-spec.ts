@@ -148,4 +148,47 @@ describe('profile', () => {
       });
     });
   });
+
+  describe('skills', () => {
+    it('returns skills by category and sort order', async () => {
+      const { id: profileId } = await prisma.profile.create({ data: janeDoe });
+      await prisma.skill.createMany({
+        data: [
+          { profileId, name: 'React', category: 'FRONTEND', sortOrder: 0 },
+          { profileId, name: 'NestJS', category: 'BACKEND', sortOrder: 2 },
+          { profileId, name: 'TypeScript', category: 'LANGUAGE', sortOrder: 3 },
+          { profileId, name: 'Node.js', category: 'BACKEND', sortOrder: 1 },
+        ],
+      });
+
+      const response = await graphql(
+        app,
+        '{ profile { skills { id name category } } }',
+      ).expect(200);
+
+      expect(response.body).toEqual({
+        data: {
+          profile: {
+            skills: [
+              { id: '3', name: 'TypeScript', category: 'LANGUAGE' },
+              { id: '4', name: 'Node.js', category: 'BACKEND' },
+              { id: '2', name: 'NestJS', category: 'BACKEND' },
+              { id: '1', name: 'React', category: 'FRONTEND' },
+            ],
+          },
+        },
+      });
+    });
+
+    it('returns an empty list when there are no skills', async () => {
+      await prisma.profile.create({ data: janeDoe });
+
+      const response = await graphql(
+        app,
+        '{ profile { skills { name } } }',
+      ).expect(200);
+
+      expect(response.body).toEqual({ data: { profile: { skills: [] } } });
+    });
+  });
 });

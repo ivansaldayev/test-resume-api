@@ -15,6 +15,7 @@ type Profile {
   links: [ProfileLink!]!
   location: String
   name: String!
+  skills: [Skill!]!
   title: String!
 }
 
@@ -25,4 +26,21 @@ type ProfileLink {
 
 type Query {
   profile: Profile!
+}
+
+type Skill {
+  category: SkillCategory!
+  id: ID!
+  name: String!
+}
+
+enum SkillCategory {
+  BACKEND
+  DATABASE
+  DEVOPS
+  FRONTEND
+  LANGUAGE
+  MOBILE
+  OTHER
+  TOOLS
 }
