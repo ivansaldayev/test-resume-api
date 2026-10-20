@@ -8,4 +8,8 @@ export class SkillsService {
   getByProfileIds(profileIds: number[]) {
     return this.skillsRepository.findByProfileIds(profileIds);
   }
+
+  getByExperienceIds(experienceIds: number[]) {
+    return this.skillsRepository.findByExperienceIds(experienceIds);
+  }
 }

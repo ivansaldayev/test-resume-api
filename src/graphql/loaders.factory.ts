@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import DataLoader from 'dataloader';
+import { ExperienceService } from '../experience/experience.service.js';
 import { ProfileService } from '../profile/profile.service.js';
 import { SkillsService } from '../skills/skills.service.js';
 import { groupByKey } from './group-by-key.js';
@@ -9,6 +10,7 @@ export class LoadersFactory {
   constructor(
     private readonly profileService: ProfileService,
     private readonly skillsService: SkillsService,
+    private readonly experienceService: ExperienceService,
   ) {}
 
   create() {
@@ -27,6 +29,24 @@ export class LoadersFactory {
             ...profileIds,
           ]);
           return groupByKey(profileIds, skills, (skill) => skill.profileId);
+        },
+      ),
+      experienceByProfileId: new DataLoader(
+        async (profileIds: readonly number[]) => {
+          const experience = await this.experienceService.getByProfileIds([
+            ...profileIds,
+          ]);
+          return groupByKey(profileIds, experience, (item) => item.profileId);
+        },
+      ),
+      skillsByExperienceId: new DataLoader(
+        async (experienceIds: readonly number[]) => {
+          const rows = await this.skillsService.getByExperienceIds([
+            ...experienceIds,
+          ]);
+          return groupByKey(experienceIds, rows, (row) => row.experienceId).map(
+            (group) => group.map((row) => row.skill),
+          );
         },
       ),
     };

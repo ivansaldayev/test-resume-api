@@ -12,4 +12,14 @@ export class SkillsRepository {
       orderBy: [{ category: 'asc' }, { sortOrder: 'asc' }, { id: 'asc' }],
     });
   }
+
+  findByExperienceIds(
+    experienceIds: number[],
+  ): Promise<{ experienceId: number; skill: Skill }[]> {
+    return this.prisma.experienceSkill.findMany({
+      where: { experienceId: { in: experienceIds } },
+      orderBy: [{ sortOrder: 'asc' }, { skillId: 'asc' }],
+      select: { experienceId: true, skill: true },
+    });
+  }
 }

@@ -2,6 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Experience {
+  achievements: [String!]!
+  company: String!
+  endDate: YearMonth
+  id: ID!
+  location: String
+  position: String!
+  skills: [Skill!]!
+  startDate: YearMonth!
+}
+
 enum LinkType {
   EMAIL
   GITHUB
@@ -11,6 +22,7 @@ enum LinkType {
 
 type Profile {
   description: String!
+  experience: [Experience!]!
   id: ID!
   links: [ProfileLink!]!
   location: String
@@ -44,3 +56,8 @@ enum SkillCategory {
   OTHER
   TOOLS
 }
+
+"""
+Year and month in YYYY-MM format, for example "2025-10"
+"""
+scalar YearMonth

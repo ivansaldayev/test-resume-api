@@ -191,4 +191,158 @@ describe('profile', () => {
       expect(response.body).toEqual({ data: { profile: { skills: [] } } });
     });
   });
+
+  describe('experience', () => {
+    it('returns experience from newest to oldest', async () => {
+      const { id: profileId } = await prisma.profile.create({ data: janeDoe });
+      await prisma.experience.createMany({
+        data: [
+          {
+            profileId,
+            company: 'Old Company',
+            position: 'Junior developer',
+            startDate: new Date('2019-05-01T00:00:00.000Z'),
+            endDate: new Date('2020-02-01T00:00:00.000Z'),
+          },
+          {
+            profileId,
+            company: 'Current Company',
+            position: 'Lead developer',
+            location: 'Remote',
+            startDate: new Date('2025-10-01T00:00:00.000Z'),
+            achievements: ['Built the API', 'Set up CI'],
+          },
+          {
+            profileId,
+            company: 'Middle Company',
+            position: 'Developer',
+            startDate: new Date('2022-01-01T00:00:00.000Z'),
+            endDate: new Date('2025-09-01T00:00:00.000Z'),
+          },
+        ],
+      });
+
+      const response = await graphql(
+        app,
+        '{ profile { experience { id company position location startDate endDate achievements } } }',
+      ).expect(200);
+
+      expect(response.body).toEqual({
+        data: {
+          profile: {
+            experience: [
+              {
+                id: '2',
+                company: 'Current Company',
+                position: 'Lead developer',
+                location: 'Remote',
+                startDate: '2025-10',
+                endDate: null,
+                achievements: ['Built the API', 'Set up CI'],
+              },
+              {
+                id: '3',
+                company: 'Middle Company',
+                position: 'Developer',
+                location: null,
+                startDate: '2022-01',
+                endDate: '2025-09',
+                achievements: [],
+              },
+              {
+                id: '1',
+                company: 'Old Company',
+                position: 'Junior developer',
+                location: null,
+                startDate: '2019-05',
+                endDate: '2020-02',
+                achievements: [],
+              },
+            ],
+          },
+        },
+      });
+    });
+
+    it('returns skills of each experience in sort order', async () => {
+      const { id: profileId } = await prisma.profile.create({ data: janeDoe });
+      await prisma.skill.createMany({
+        data: [
+          { profileId, name: 'TypeScript', category: 'LANGUAGE', sortOrder: 0 },
+          { profileId, name: 'Node.js', category: 'BACKEND', sortOrder: 1 },
+          { profileId, name: 'React', category: 'FRONTEND', sortOrder: 2 },
+        ],
+      });
+      await prisma.experience.createMany({
+        data: [
+          {
+            profileId,
+            company: 'New Company',
+            position: 'Developer',
+            startDate: new Date('2024-01-01T00:00:00.000Z'),
+          },
+          {
+            profileId,
+            company: 'Old Company',
+            position: 'Developer',
+            startDate: new Date('2020-01-01T00:00:00.000Z'),
+          },
+        ],
+      });
+      await prisma.experienceSkill.createMany({
+        data: [
+          { experienceId: 1, skillId: 3, sortOrder: 1 },
+          { experienceId: 2, skillId: 2, sortOrder: 0 },
+          { experienceId: 1, skillId: 1, sortOrder: 0 },
+        ],
+      });
+
+      const response = await graphql(
+        app,
+        '{ profile { experience { company skills { name } } } }',
+      ).expect(200);
+
+      expect(response.body).toEqual({
+        data: {
+          profile: {
+            experience: [
+              {
+                company: 'New Company',
+                skills: [{ name: 'TypeScript' }, { name: 'React' }],
+              },
+              { company: 'Old Company', skills: [{ name: 'Node.js' }] },
+            ],
+          },
+        },
+      });
+    });
+
+    it('returns empty lists when there is no data', async () => {
+      const { id: profileId } = await prisma.profile.create({ data: janeDoe });
+
+      const noExperience = await graphql(
+        app,
+        '{ profile { experience { company } } }',
+      ).expect(200);
+      expect(noExperience.body).toEqual({
+        data: { profile: { experience: [] } },
+      });
+
+      await prisma.experience.create({
+        data: {
+          profileId,
+          company: 'Company',
+          position: 'Developer',
+          startDate: new Date('2024-01-01T00:00:00.000Z'),
+        },
+      });
+      const noSkills = await graphql(
+        app,
+        '{ profile { experience { skills { name } } } }',
+      ).expect(200);
+      expect(noSkills.body).toEqual({
+        data: { profile: { experience: [{ skills: [] }] } },
+      });
+    });
+  });
 });
