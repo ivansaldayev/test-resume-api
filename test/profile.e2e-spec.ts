@@ -345,4 +345,124 @@ describe('profile', () => {
       });
     });
   });
+
+  describe('projects', () => {
+    it('returns projects in sort order', async () => {
+      const { id: profileId } = await prisma.profile.create({ data: janeDoe });
+      await prisma.project.createMany({
+        data: [
+          {
+            profileId,
+            name: 'Second',
+            description: 'Closed project',
+            sortOrder: 1,
+          },
+          {
+            profileId,
+            name: 'First',
+            description: 'Open source library',
+            url: 'https://www.npmjs.com/package/first',
+            repositoryUrl: 'https://github.com/jane-doe/first',
+            sortOrder: 0,
+          },
+        ],
+      });
+
+      const response = await graphql(
+        app,
+        '{ profile { projects { id name description url repositoryUrl } } }',
+      ).expect(200);
+
+      expect(response.body).toEqual({
+        data: {
+          profile: {
+            projects: [
+              {
+                id: '2',
+                name: 'First',
+                description: 'Open source library',
+                url: 'https://www.npmjs.com/package/first',
+                repositoryUrl: 'https://github.com/jane-doe/first',
+              },
+              {
+                id: '1',
+                name: 'Second',
+                description: 'Closed project',
+                url: null,
+                repositoryUrl: null,
+              },
+            ],
+          },
+        },
+      });
+    });
+
+    it('returns skills of each project in sort order', async () => {
+      const { id: profileId } = await prisma.profile.create({ data: janeDoe });
+      await prisma.skill.createMany({
+        data: [
+          { profileId, name: 'TypeScript', category: 'LANGUAGE', sortOrder: 0 },
+          { profileId, name: 'Node.js', category: 'BACKEND', sortOrder: 1 },
+          { profileId, name: 'React', category: 'FRONTEND', sortOrder: 2 },
+        ],
+      });
+      await prisma.project.createMany({
+        data: [
+          { profileId, name: 'Web app', sortOrder: 0 },
+          { profileId, name: 'API', sortOrder: 1 },
+        ],
+      });
+      await prisma.projectSkill.createMany({
+        data: [
+          { projectId: 1, skillId: 3, sortOrder: 0 },
+          { projectId: 2, skillId: 2, sortOrder: 1 },
+          { projectId: 1, skillId: 1, sortOrder: 1 },
+          { projectId: 2, skillId: 1, sortOrder: 0 },
+        ],
+      });
+
+      const response = await graphql(
+        app,
+        '{ profile { projects { name skills { name } } } }',
+      ).expect(200);
+
+      expect(response.body).toEqual({
+        data: {
+          profile: {
+            projects: [
+              {
+                name: 'Web app',
+                skills: [{ name: 'React' }, { name: 'TypeScript' }],
+              },
+              {
+                name: 'API',
+                skills: [{ name: 'TypeScript' }, { name: 'Node.js' }],
+              },
+            ],
+          },
+        },
+      });
+    });
+
+    it('returns empty lists when there is no data', async () => {
+      const { id: profileId } = await prisma.profile.create({ data: janeDoe });
+
+      const noProjects = await graphql(
+        app,
+        '{ profile { projects { name } } }',
+      ).expect(200);
+      expect(noProjects.body).toEqual({ data: { profile: { projects: [] } } });
+
+      await prisma.project.create({
+        data: { profileId, name: 'Project', sortOrder: 0 },
+      });
+      const noSkills = await graphql(
+        app,
+        '{ profile { projects { skills { name } } } }',
+      ).expect(200);
+      expect(noSkills.body).toEqual({
+        data: { profile: { projects: [{ skills: [] }] } },
+      });
+    });
+  });
 });

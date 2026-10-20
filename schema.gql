@@ -27,6 +27,7 @@ type Profile {
   links: [ProfileLink!]!
   location: String
   name: String!
+  projects: [Project!]!
   skills: [Skill!]!
   title: String!
 }
@@ -34,6 +35,15 @@ type Profile {
 type ProfileLink {
   type: LinkType!
   url: String!
+}
+
+type Project {
+  description: String
+  id: ID!
+  name: String!
+  repositoryUrl: String
+  skills: [Skill!]!
+  url: String
 }
 
 type Query {

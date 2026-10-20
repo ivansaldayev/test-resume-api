@@ -12,4 +12,8 @@ export class SkillsService {
   getByExperienceIds(experienceIds: number[]) {
     return this.skillsRepository.findByExperienceIds(experienceIds);
   }
+
+  getByProjectIds(projectIds: number[]) {
+    return this.skillsRepository.findByProjectIds(projectIds);
+  }
 }

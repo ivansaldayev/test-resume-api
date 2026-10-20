@@ -22,4 +22,14 @@ export class SkillsRepository {
       select: { experienceId: true, skill: true },
     });
   }
+
+  findByProjectIds(
+    projectIds: number[],
+  ): Promise<{ projectId: number; skill: Skill }[]> {
+    return this.prisma.projectSkill.findMany({
+      where: { projectId: { in: projectIds } },
+      orderBy: [{ sortOrder: 'asc' }, { skillId: 'asc' }],
+      select: { projectId: true, skill: true },
+    });
+  }
 }
