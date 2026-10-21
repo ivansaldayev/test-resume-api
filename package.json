@@ -1,6 +1,6 @@
 {
   "name": "resume-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "NestJS + GraphQL + Prisma digital resume API (test task)",
   "author": "Ivan Saldayev <ivansaldayev@gmail.com>",
   "private": true,
