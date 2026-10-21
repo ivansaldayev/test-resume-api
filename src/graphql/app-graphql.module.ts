@@ -25,6 +25,7 @@ export const AppGraphQLModule = GraphQLModule.forRootAsync<ApolloDriverConfig>({
     buildSchemaOptions: { addNewlineAtEnd: true },
     graphiql: false,
     introspection: true,
+    fieldResolverEnhancers: ['filters'],
     plugins: [
       ApolloServerPluginLandingPageLocalDefault({
         embed: { runTelemetry: false, endpointIsEditable: false },
